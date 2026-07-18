@@ -27,13 +27,14 @@ public class CoinMovement : MonoBehaviour
 
     void Update()
     {
-        float speed = isFalling ? fallSpeed : idleSpeed;
-        transform.Translate(Vector2.down * speed * Time.deltaTime);
+        float difficultyMultiplier =
+            DifficultyManager.Instance.GetCoinFallSpeed();
 
-        if (transform.position.y < -6f)
-        {
-            Destroy(gameObject);
-        }
+        float speed = isFalling
+            ? fallSpeed * difficultyMultiplier
+            : idleSpeed;
+
+        transform.Translate(Vector2.down * speed * Time.deltaTime);
     }
 
     void StartFall()
