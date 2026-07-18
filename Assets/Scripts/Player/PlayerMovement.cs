@@ -7,10 +7,9 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     private float moveInput;
-
-    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
@@ -21,22 +20,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // Membaca input keyboard
         moveInput = Input.GetAxisRaw("Horizontal");
 
-        // Mengubah animasi
         animator.SetBool("IsRunning", moveInput != 0);
 
         if (moveInput > 0)
             spriteRenderer.flipX = false;
         else if (moveInput < 0)
             spriteRenderer.flipX = true;
-
     }
 
     void FixedUpdate()
     {
-        // Menggerakkan Player
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
     }
 }
