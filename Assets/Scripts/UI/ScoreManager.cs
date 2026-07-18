@@ -6,6 +6,11 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
 
+    public int CurrentScore
+    {
+        get { return score; }
+    }
+
     [Header("UI")]
     public TextMeshProUGUI scoreText;
 
