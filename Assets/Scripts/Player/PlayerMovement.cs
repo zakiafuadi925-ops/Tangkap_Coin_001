@@ -5,6 +5,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 5f;
 
+    [Header("Boundary")]
+    public float minX = -8f;
+    public float maxX = 8f;
+
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -33,5 +37,11 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+
+        Vector3 posisi = transform.position;
+
+        posisi.x = Mathf.Clamp(posisi.x, minX, maxX);
+
+        transform.position = posisi;
     }
 }
