@@ -26,6 +26,7 @@ public class Coin : MonoBehaviour
             // Tambah score
             ScoreManager.Instance.AddScore(1);
             FloatingTextManager.Instance.ShowText("+1", transform.position);
+            AudioManager.Instance.PlayCoin();
 
             // Hentikan gerakan coin
             coinMovement.enabled = false;

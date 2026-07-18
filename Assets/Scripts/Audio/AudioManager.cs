@@ -24,9 +24,18 @@ public class AudioManager : MonoBehaviour
 
     public void PlayCoin()
     {
-        if (coinClip != null)
+        if (sfxSource == null)
         {
-            sfxSource.PlayOneShot(coinClip);
+            Debug.LogWarning("AudioSource belum dihubungkan.");
+            return;
         }
+
+        if (coinClip == null)
+        {
+            Debug.LogWarning("Coin Clip belum dihubungkan.");
+            return;
+        }
+
+        sfxSource.PlayOneShot(coinClip);
     }
 }
