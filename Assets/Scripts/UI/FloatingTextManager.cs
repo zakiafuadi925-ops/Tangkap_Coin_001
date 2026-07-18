@@ -22,4 +22,6 @@ public class FloatingTextManager : MonoBehaviour
 
         obj.GetComponent<FloatingText>().SetText(text);
     }
+
+    
 }
