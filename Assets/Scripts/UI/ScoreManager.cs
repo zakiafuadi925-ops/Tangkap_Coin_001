@@ -5,9 +5,11 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
 
+    [Header("UI")]
     public TextMeshProUGUI scoreText;
 
-    private int score = 0;
+    [Header("Score")]
+    [SerializeField] private int score = 0;
 
     private void Awake()
     {
@@ -27,6 +29,6 @@ public class ScoreManager : MonoBehaviour
 
     private void UpdateScoreUI()
     {
-        scoreText.text = "Score : " + score;
+        scoreText.text = "coin " + score.ToString("000000");
     }
 }
