@@ -3,9 +3,19 @@ using UnityEngine;
 
 public class CoinSpawner : MonoBehaviour
 {
+    [Header("Coin Prefab")]
+    
+
+    [Header("Spawn Area")]
+    public float minX = -2.5f;
+    public float maxX = 2.5f;
+    public float spawnY = 5f;
+
+    [Header("Spawn Time")]
+    public float spawnInterval = 1.5f;
     public GameObject coinPrefab;
 
-    public float spawnInterval = 1.5f;
+    
 
     IEnumerator Start()
     {
@@ -19,7 +29,9 @@ public class CoinSpawner : MonoBehaviour
 
     void SpawnCoin()
     {
-        Instantiate(coinPrefab, transform.position, Quaternion.identity);
+        float randomX = Random.Range(minX, maxX);
+        Vector3 spawnPosition = new Vector3(randomX, spawnY, 0);
+        Instantiate(coinPrefab, spawnPosition, Quaternion.identity);
     }
 
     void Update()
