@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using System.Collections;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class ScoreManager : MonoBehaviour
     [Header("Score")]
     [SerializeField] private int score = 0;
 
+
+    private Vector3 originalScale;
+
+    [SerializeField] private float popScale = 1.25f;
+    [SerializeField] private float popDuration = 0.15f;
+
     private void Awake()
     {
         Instance = this;
@@ -18,6 +25,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
+        originalScale = scoreText.transform.localScale;
         UpdateScoreUI();
     }
 
@@ -25,10 +33,21 @@ public class ScoreManager : MonoBehaviour
     {
         score += amount;
         UpdateScoreUI();
+         StopAllCoroutines();
+        StartCoroutine(PopAnimation());
     }
 
     private void UpdateScoreUI()
     {
         scoreText.text = "coin " + score.ToString("000000");
+    }
+
+    IEnumerator PopAnimation()
+    {
+        scoreText.transform.localScale = originalScale * popScale;
+
+        yield return new WaitForSeconds(popDuration);
+
+        scoreText.transform.localScale = originalScale;
     }
 }
