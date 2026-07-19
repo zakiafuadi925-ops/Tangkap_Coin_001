@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   sfxSource: {fileID: 136516750}
-  coinClip: {fileID: 0}
+  coinClip: {fileID: 8300000, guid: ff70a46b689dcab49861c46c476a255c, type: 3}
 --- !u!82 &136516750
 AudioSource:
   m_ObjectHideFlags: 0
@@ -165,16 +165,16 @@ AudioSource:
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: -0.31
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 83
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
-  Pan2D: 0
+  Pan2D: -0.38
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
@@ -238,7 +238,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.731
       inSlope: 0
       outSlope: 0
       tangentMode: 0
