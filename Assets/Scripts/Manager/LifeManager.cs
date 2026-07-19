@@ -7,6 +7,7 @@ public class LifeManager : MonoBehaviour
     [Header("Life")]
     [SerializeField] private int maxLife = 3;
 
+    [SerializeField] private LifeUI lifeUI;
     public int CurrentLife { get; private set; }
 
     private void Awake()
@@ -19,6 +20,11 @@ public class LifeManager : MonoBehaviour
         CurrentLife = maxLife;
     }
 
+    private void Start()
+    {
+        lifeUI.UpdateHearts();
+    }
+
     public void AddLife(int amount = 1)
     {
         CurrentLife += amount;
@@ -27,6 +33,8 @@ public class LifeManager : MonoBehaviour
             CurrentLife = maxLife;
 
         Debug.Log("Life : " + CurrentLife);
+
+        lifeUI.UpdateHearts();
     }
 
     public void RemoveLife(int amount = 1)
@@ -42,6 +50,8 @@ public class LifeManager : MonoBehaviour
         {
             GameOver();
         }
+
+        lifeUI.UpdateHearts();
     }
 
     void GameOver()
