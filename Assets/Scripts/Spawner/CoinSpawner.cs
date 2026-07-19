@@ -4,7 +4,8 @@ using UnityEngine;
 public class CoinSpawner : MonoBehaviour
 {
     [Header("Collectible Prefabs")]
-    [SerializeField] private GameObject[] collectiblePrefabs;
+    [SerializeField]
+    private SpawnData[] collectibles;
 
     [Header("Spawn Area")]
     public float minX = -2.5f;
@@ -24,11 +25,30 @@ public class CoinSpawner : MonoBehaviour
 
     void SpawnCollectible()
     {
-        int randomIndex = Random.Range(0, collectiblePrefabs.Length);
+        GameObject prefab = GetRandomCollectible();
 
-        Instantiate(
-            collectiblePrefabs[randomIndex],
-            transform.position,
-            Quaternion.identity);
+        Instantiate(prefab, transform.position, Quaternion.identity);
+    }
+
+    GameObject GetRandomCollectible()
+    {
+        int totalWeight = 0;
+
+        foreach (SpawnData item in collectibles)
+        {
+            totalWeight += item.weight;
+        }
+
+        int random = Random.Range(0, totalWeight);
+
+        foreach (SpawnData item in collectibles)
+        {
+            if (random < item.weight)
+                return item.prefab;
+
+            random -= item.weight;
+        }
+
+        return collectibles[0].prefab;
     }
 }
