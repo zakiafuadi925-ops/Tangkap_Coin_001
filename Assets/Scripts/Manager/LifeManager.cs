@@ -48,4 +48,6 @@ public class LifeManager : MonoBehaviour
     {
         Debug.Log("GAME OVER");
     }
+
+    
 }
