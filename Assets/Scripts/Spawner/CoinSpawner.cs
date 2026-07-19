@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class CoinSpawner : MonoBehaviour
 {
-    [Header("Coin Prefab")]
-    public GameObject coinPrefab;
+    [Header("Collectible Prefabs")]
+    [SerializeField] private GameObject[] collectiblePrefabs;
 
     [Header("Spawn Area")]
     public float minX = -2.5f;
@@ -15,18 +15,20 @@ public class CoinSpawner : MonoBehaviour
     {
         while (true)
         {
-            SpawnCoin();
+            SpawnCollectible();
 
             yield return new WaitForSeconds(
                 DifficultyManager.Instance.GetSpawnInterval());
         }
     }
 
-    void SpawnCoin()
+    void SpawnCollectible()
     {
-        float randomX = Random.Range(minX, maxX);
-        Vector3 spawnPosition = new Vector3(randomX, spawnY, 0);
+        int randomIndex = Random.Range(0, collectiblePrefabs.Length);
 
-        Instantiate(coinPrefab, spawnPosition, Quaternion.identity);
+        Instantiate(
+            collectiblePrefabs[randomIndex],
+            transform.position,
+            Quaternion.identity);
     }
 }

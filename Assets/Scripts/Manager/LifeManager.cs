@@ -22,7 +22,6 @@ public class LifeManager : MonoBehaviour
 
     private void Start()
     {
-        RemoveLife();
         lifeUI.UpdateHearts();
        
     }
