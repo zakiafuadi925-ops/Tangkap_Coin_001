@@ -4,17 +4,47 @@ public class EffectManager : MonoBehaviour
 {
     public static EffectManager Instance;
 
-    [SerializeField] private GameObject coinEffectPrefab;
+    [Header("Effects")]
+    [SerializeField] private GameObject coinEffect;
+    [SerializeField] private GameObject bombEffect;
+    [SerializeField] private GameObject diamondEffect;
+    [SerializeField] private GameObject heartEffect;
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
 
-    public void PlayCoinEffect(Vector3 position)
+    public void Play(CollectibleType type, Vector3 position)
     {
-        GameObject effect = Instantiate(coinEffectPrefab, position, Quaternion.identity);
+        GameObject effect = null;
 
-        Destroy(effect, 1f);
+        switch (type)
+        {
+            case CollectibleType.Coin:
+                effect = coinEffect;
+                break;
+
+            case CollectibleType.Bomb:
+                effect = bombEffect;
+                break;
+
+            case CollectibleType.Diamond:
+                effect = diamondEffect;
+                break;
+
+            case CollectibleType.Heart:
+                effect = heartEffect;
+                break;
+        }
+
+        if (effect != null)
+        {
+            GameObject obj = Instantiate(effect, position, Quaternion.identity);
+            Destroy(obj, 1f);
+        }
     }
 }

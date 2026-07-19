@@ -42,7 +42,7 @@ public class Collectible : MonoBehaviour
         AudioManager.Instance.Play(itemType);
 
         // Effect
-        EffectManager.Instance.PlayCoinEffect(transform.position);
+        EffectManager.Instance.Play(itemType, transform.position);
 
         // Hentikan gerakan
         if (coinMovement != null)
