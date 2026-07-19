@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5130920895919597862}
   - component: {fileID: 7619898133428779500}
   - component: {fileID: 1870077443994214407}
-  - component: {fileID: -2413142138739593618}
   - component: {fileID: -5092088086159716150}
+  - component: {fileID: 1504242520103596203}
   m_Layer: 3
   m_Name: Coin_Gold
   m_TagString: Coin
@@ -182,18 +182,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-2413142138739593618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6602488583425554048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b22a872f438663d43bede30460cb6e5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Coin
 --- !u!114 &-5092088086159716150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,4 +194,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e07791d7c66581a41b36bb68e80fefb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinMovement
-  fallSpeed: 4
+  minIdleSpeed: 1
+  maxIdleSpeed: 2
+  minFallSpeed: 4
+  maxFallSpeed: 7
+  minIdleTime: 0.5
+  maxIdleTime: 1.5
+--- !u!114 &1504242520103596203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6602488583425554048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 694d6fb8438bc9e4c90032d6868ac9ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Collectible
+  type: 0
+  scoreValue: 1
+  animator: {fileID: 0}

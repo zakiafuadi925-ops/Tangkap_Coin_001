@@ -3,47 +3,59 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
     [Header("Item")]
-    public CollectibleType type;
+    [SerializeField] private CollectibleType itemType;
 
-    [Header("Score")]
-    public int scoreValue = 1;
+    [Header("Gameplay")]
+    [SerializeField] private int scoreValue = 1;
 
-    [Header("Animation")]
-    public Animator animator;
+    private Animator animator;
+    private Collider2D itemCollider;
+    private CoinMovement coinMovement;
 
     private bool collected = false;
 
-    public void Collect()
+    void Start()
     {
-        if (collected)
-            return;
-
-        collected = true;
-
-        ScoreManager.Instance.AddScore(scoreValue);
-
-        FloatingTextManager.Instance.ShowText(
-            scoreValue > 0 ? "+" + scoreValue : scoreValue.ToString(),
-            transform.position);
-
-        AudioManager.Instance.PlayCoin();
-
-        EffectManager.Instance.PlayCoinEffect(transform.position);
-
-        animator.SetTrigger("Collect");
-
-        GetComponent<Collider2D>().enabled = false;
-
-        GetComponent<CoinMovement>().enabled = false;
-
-        Destroy(gameObject, 0.8f);
+        animator = GetComponent<Animator>();
+        itemCollider = GetComponent<Collider2D>();
+        coinMovement = GetComponent<CoinMovement>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            Collect();
-        }
+        if (collected)
+            return;
+
+        if (!other.CompareTag("Player"))
+            return;
+
+        collected = true;
+
+        // Tambah / Kurangi Score
+        ScoreManager.Instance.AddScore(scoreValue);
+
+        // Floating Text
+        string text = scoreValue > 0 ? "+" + scoreValue : scoreValue.ToString();
+        FloatingTextManager.Instance.ShowText(text, transform.position);
+
+        // Audio
+        AudioManager.Instance.Play(itemType);
+
+        // Effect
+        EffectManager.Instance.PlayCoinEffect(transform.position);
+
+        // Hentikan gerakan
+        if (coinMovement != null)
+            coinMovement.enabled = false;
+
+        // Matikan collider
+        if (itemCollider != null)
+            itemCollider.enabled = false;
+
+        // Jalankan animasi
+        if (animator != null)
+            animator.SetTrigger("Collect");
+
+        Destroy(gameObject, 0.5f);
     }
 }
