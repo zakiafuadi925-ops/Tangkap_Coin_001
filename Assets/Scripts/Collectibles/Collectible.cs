@@ -6,7 +6,9 @@ public class Collectible : MonoBehaviour
     [SerializeField] private CollectibleType itemType;
 
     [Header("Gameplay")]
-    [SerializeField] private int scoreValue = 1;
+    [SerializeField] private int scoreValue = 0;
+
+    [SerializeField] private int lifeChange = 0;
 
     private Animator animator;
     private Collider2D itemCollider;
@@ -32,11 +34,45 @@ public class Collectible : MonoBehaviour
         collected = true;
 
         // Tambah / Kurangi Score
-        ScoreManager.Instance.AddScore(scoreValue);
+        // Score
+        if (scoreValue != 0)
+        {
+            ScoreManager.Instance.AddScore(scoreValue);
+        }
+
+        // Life
+        if (lifeChange > 0)
+        {
+            LifeManager.Instance.AddLife(lifeChange);
+        }
+        else if (lifeChange < 0)
+        {
+            LifeManager.Instance.RemoveLife(-lifeChange);
+        }
 
         // Floating Text
-        string text = scoreValue > 0 ? "+" + scoreValue : scoreValue.ToString();
-        FloatingTextManager.Instance.ShowText(text, transform.position);
+        string text = "";
+        if (scoreValue > 0)
+        {
+            text = "+" + scoreValue;
+        }
+        else if (scoreValue < 0)
+        {
+            text = scoreValue.ToString();
+        }
+        else if (lifeChange > 0)
+        {
+            text = "+❤";
+        }
+        else if (lifeChange < 0)
+        {
+            text = "-❤";
+        }
+
+        if (!string.IsNullOrEmpty(text))
+        {
+            FloatingTextManager.Instance.ShowText(text, transform.position);
+        }
 
         // Audio
         AudioManager.Instance.Play(itemType);
