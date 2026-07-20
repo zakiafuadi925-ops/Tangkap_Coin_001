@@ -27,7 +27,21 @@ public class CoinSpawner : MonoBehaviour
     {
         GameObject prefab = GetRandomCollectible();
 
-        Instantiate(prefab, transform.position, Quaternion.identity);
+        Debug.Log(prefab.name);
+
+
+        if (prefab == null)
+        {
+            Debug.LogError("Prefab masih kosong!");
+            return;
+        }
+
+        Vector3 spawnPos = new Vector3(
+            Random.Range(minX, maxX),
+            spawnY,
+            0);
+
+        Instantiate(prefab, spawnPos, Quaternion.identity);
     }
 
     GameObject GetRandomCollectible()
