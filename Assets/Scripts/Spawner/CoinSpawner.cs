@@ -27,7 +27,7 @@ public class CoinSpawner : MonoBehaviour
     {
         GameObject prefab = GetRandomCollectible();
 
-        Debug.Log(prefab.name);
+        
 
 
         if (prefab == null)
@@ -35,6 +35,8 @@ public class CoinSpawner : MonoBehaviour
             Debug.LogError("Prefab masih kosong!");
             return;
         }
+
+        Debug.Log("Spawn : " + prefab.name);
 
         Vector3 spawnPos = new Vector3(
             Random.Range(minX, maxX),
@@ -50,15 +52,24 @@ public class CoinSpawner : MonoBehaviour
 
         foreach (SpawnData item in collectibles)
         {
+            Debug.Log($"Item: {(item.prefab != null ? item.prefab.name : "NULL")}  Weight: {item.weight}");
+
             totalWeight += item.weight;
         }
 
+        Debug.Log("Total Weight = " + totalWeight);
+
         int random = Random.Range(0, totalWeight);
+
+        Debug.Log("Random = " + random);
 
         foreach (SpawnData item in collectibles)
         {
             if (random < item.weight)
+            {
+                Debug.Log("Selected = " + item.prefab.name);
                 return item.prefab;
+            }
 
             random -= item.weight;
         }
